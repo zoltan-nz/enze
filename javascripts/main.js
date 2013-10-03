@@ -20,20 +20,17 @@ var sendEmail = function(event)
             name: $('#name').val(),
             email: $('#email').val(),
             message: $('#message').val()
-    }
+    };
 
     var request = $.ajax({
-        url: 'send.php',
+        url: $(this).prop('action'),
         type: 'post',
         data: fullmessage,
         dataType: 'json'
     });
 
     request.done(function (response, textStatus, jqXHR) {
-        console.log("Response: " + response);
-        console.log("textStatus: " + textStatus);
-        console.log("jqXHR: " + jqXHR);
-
+        $('#contact-form').html("<div class='response'><h1>Thanks for your message! We are getting touch with you soon.</h1></div>");
     });
 
     request.fail(function (jqXHR, textStatus, errorThrown){
@@ -45,11 +42,11 @@ var sendEmail = function(event)
 
     request.always(function() {
         $inputs.prop('disabled', false);
-    })
+    });
 
     event.preventDefault();
 
-}
+};
 
 
 $(document).ready(function(){
